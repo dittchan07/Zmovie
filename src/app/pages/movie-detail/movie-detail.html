@@ -1,73 +1,74 @@
-<div class="detail-container">
-  @if (film) {
-    <h2>{{ film.title || 'Judul tidak tersedia' }}</h2>
+<div class="detail-container" *ngIf="film$ | async as film; else notFound">
+  <h2>{{ film.title || 'Judul tidak tersedia' }}</h2>
 
-    <p>
-      {{ film.genre || 'Genre tidak diketahui' }} |
-      {{ film.year || 'Tahun tidak diketahui' }}
-    </p>
+  <p>
+    {{ film.genre || 'Genre tidak diketahui' }} |
+    {{ film.year || 'Tahun tidak diketahui' }}
+  </p>
 
-    <p>
-      Rating:
-      {{ film.rating !== undefined ? film.rating : 'Belum dinilai' }} ★
-    </p>
+  <p>
+    Rating:
+    {{ film.rating !== undefined ? film.rating : 'Belum dinilai' }} ★
+  </p>
 
-    <img
-      [src]="film.poster || 'assets/no-poster.png'"
-      [alt]="film.title || 'Poster Film'"
-      class="poster"
-    />
+  <img
+    [src]="film.poster || 'assets/no-poster.png'"
+    [alt]="film.title || 'Poster Film'"
+    class="poster"
+  />
 
-    <button (click)="openModal()">🎬 Watch Now</button>
+  <button (click)="openModal()">🎬 Watch Now</button>
 
-    <div class="modal" *ngIf="showModal">
-      <div class="modal-content">
-        <span class="close" (click)="closeModal()">&times;</span>
-        <iframe
-          *ngIf="film?.videoUrl"
-          [src]="film.videoUrl | safeUrl"
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
+  <div class="modal" *ngIf="showModal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <iframe
+        *ngIf="film.videoUrl"
+        [src]="film.videoUrl | safeUrl"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+
+  <div class="comments-section">
+    <h3>Komentar</h3>
+
+    <form (ngSubmit)="addComment()" class="comment-form">
+      <input
+        type="text"
+        [(ngModel)]="newComment"
+        name="comment"
+        placeholder="Tulis komentar..."
+        required
+      />
+      <button type="submit">Kirim</button>
+    </form>
+
+    <div
+      class="comment-list"
+      *ngIf="comments$ | async as comments; else noComments"
+      #commentList
+    >
+      <div class="comment" *ngFor="let c of comments">
+        <strong>{{ c.userName }}</strong>
+        <span class="time">
+          {{
+            c.createdAt?.toDate
+              ? (c.createdAt.toDate() | date: 'short')
+              : (c.createdAt | date: 'short')
+          }}
+        </span>
+        <p>{{ c.text }}</p>
       </div>
     </div>
 
-    <div class="comments-section">
-      <h3>Komentar</h3>
-
-      <form (ngSubmit)="addComment()" class="comment-form">
-        <input
-          type="text"
-          [(ngModel)]="newComment"
-          name="comment"
-          placeholder="Tulis komentar..."
-          required
-        />
-        <button type="submit">Kirim</button>
-      </form>
-
-      <div
-        class="comment-list"
-        *ngIf="comments$ | async as comments; else noComments"
-      >
-        <div class="comment" *ngFor="let c of comments">
-          <strong>{{ c.userName }}</strong>
-          <span class="time">
-            {{
-              c.createdAt?.toDate
-                ? (c.createdAt.toDate() | date: 'short')
-                : (c.createdAt | date: 'short')
-            }}
-          </span>
-          <p>{{ c.text }}</p>
-        </div>
-      </div>
-
-      <ng-template #noComments>
-        <p>Belum ada komentar.</p>
-      </ng-template>
-    </div>
-  } @else {
-    <p>Film tidak ditemukan.</p>
-  }
+    <ng-template #noComments>
+      <p>Belum ada komentar.</p>
+    </ng-template>
+  </div>
 </div>
+
+<ng-template #notFound>
+  <p>Film tidak ditemukan.</p>
+</ng-template>
