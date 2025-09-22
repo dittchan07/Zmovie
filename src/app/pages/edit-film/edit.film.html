@@ -1,0 +1,54 @@
+<div class="container mx-auto p-6 max-w-lg bg-gray-800 text-white rounded-lg shadow-lg">
+  <h2 class="text-2xl font-bold mb-4">Edit Film</h2>
+
+  <div *ngIf="isLoading" class="text-center">⏳ Loading...</div>
+
+  <form *ngIf="!isLoading" (ngSubmit)="saveFilm()" class="space-y-4">
+    <div>
+      <label class="block mb-1">Title</label>
+      <input [(ngModel)]="film.title" name="title" class="w-full p-2 rounded text-black" required />
+    </div>
+
+    <div>
+      <label class="block mb-1">Description</label>
+      <textarea [(ngModel)]="film.description" name="description" class="w-full p-2 rounded text-black" rows="3"></textarea>
+    </div>
+
+    <div>
+      <label class="block mb-1">Year</label>
+      <input type="number" [(ngModel)]="film.year" name="year" class="w-full p-2 rounded text-black" required />
+    </div>
+
+    <div>
+      <label class="block mb-1">Poster URL</label>
+      <input [(ngModel)]="film.poster" name="poster" class="w-full p-2 rounded text-black" />
+      <img *ngIf="film.poster" [src]="film.poster || ''" alt="Poster" class="mt-2 w-32 rounded shadow-md" />
+    </div>
+
+    <div>
+      <label class="block mb-1">Rating</label>
+      <input type="number" [(ngModel)]="film.rating" name="rating" class="w-full p-2 rounded text-black" min="1" max="5" />
+    </div>
+
+    <div>
+      <label class="block mb-1">Video URL (YouTube)</label>
+      <input [(ngModel)]="film.videoUrl" name="videoUrl" class="w-full p-2 rounded text-black" />
+      <iframe
+        *ngIf="film.videoUrl"
+        [src]="getSafeUrl(film.videoUrl)"
+        class="mt-3 w-full h-48 rounded shadow-md"
+        frameborder="0"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="flex items-center">
+      <input type="checkbox" [(ngModel)]="film.published" name="published" class="mr-2" />
+      <label>Published</label>
+    </div>
+
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white">
+      Save Changes
+    </button>
+  </form>
+</div>

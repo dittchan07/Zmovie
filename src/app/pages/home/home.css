@@ -1,0 +1,157 @@
+/* ===== Container ===== */
+.home-container {
+  padding: 20px;
+  background: #141414; /* Netflix dark */
+  color: #fff;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== Header ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #e50914;
+}
+
+.logout-btn {
+  background: #e50914;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #f40612;
+  transform: scale(1.05);
+}
+
+/* ===== Loading & Error ===== */
+.loading {
+  text-align: center;
+  margin: 40px 0;
+  font-size: 1.1rem;
+  color: #bbb;
+}
+
+.error {
+  background: #ff4d4d;
+  color: #fff;
+  padding: 12px;
+  border-radius: 6px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* ===== Film Grid ===== */
+.film-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 18px;
+}
+
+/* ===== Film Card ===== */
+.film-card {
+  cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #1f1f1f;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.film-card:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+
+.poster-wrapper {
+  position: relative;
+}
+
+.poster {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+/* ===== Badge (Published/Draft) ===== */
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.badge.published {
+  background: #4caf50;
+  color: #fff;
+}
+
+.badge.draft {
+  background: #f44336;
+  color: #fff;
+}
+
+/* ===== Overlay Info ===== */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3));
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.film-card:hover .overlay {
+  opacity: 1;
+}
+
+.overlay h3 {
+  margin-bottom: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.overlay p {
+  margin: 2px 0;
+  font-size: 0.85rem;
+  color: #ddd;
+}
+
+/* ===== Empty State ===== */
+.empty {
+  text-align: center;
+  color: #bbb;
+  margin-top: 50px;
+  font-size: 1.1rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 500px) {
+  .title {
+    font-size: 1.5rem;
+  }
+  .poster {
+    height: 200px;
+  }
+}

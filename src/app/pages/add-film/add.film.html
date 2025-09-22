@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Tambah Film Baru</h2>
+
+  <form [formGroup]="filmForm" (ngSubmit)="onSubmit()">
+    <label>Judul</label>
+    <input formControlName="title" />
+
+    <label>Deskripsi</label>
+    <textarea formControlName="description"></textarea>
+
+    <label>Genre</label>
+    <input formControlName="genre" />
+
+    <label>Tahun</label>
+    <input type="number" formControlName="year" />
+
+    <label>Rating</label>
+    <input type="number" formControlName="rating" min="1" max="5" />
+
+    <label>Poster URL</label>
+    <input formControlName="poster" />
+
+    <label>Video URL</label>
+    <input formControlName="videoUrl" />
+
+    <label>
+      <input type="checkbox" formControlName="published" />
+      Publikasikan
+    </label>
+
+    <button type="submit" [disabled]="filmForm.invalid">Simpan</button>
+  </form>
+</div>

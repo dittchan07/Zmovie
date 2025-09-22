@@ -1,0 +1,96 @@
+/* Container utama */
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #141414; /* warna dasar Netflix */
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Judul */
+.container h2 {
+  text-align: center;
+  color: #e50914; /* merah khas Netflix */
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Label */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  color: #bbb;
+}
+
+/* Input umum */
+input, textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border: none;
+  border-radius: 8px;
+  background: #2a2a2a;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  background: #333;
+  border: 1px solid #e50914;
+}
+
+/* Textarea */
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+  transform: scale(1.2);
+  accent-color: #e50914; /* warna check */
+}
+
+/* Tombol submit */
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #e50914;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background: #f40612;
+  transform: scale(1.02);
+}
+
+/* Responsif */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+
+  .container h2 {
+    font-size: 1.5rem;
+  }
+}

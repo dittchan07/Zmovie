@@ -1,0 +1,18 @@
+.not-authorized-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  text-align: center;
+  color: red;
+}
+
+.not-authorized-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.not-authorized-container p {
+  font-size: 1.2rem;
+}

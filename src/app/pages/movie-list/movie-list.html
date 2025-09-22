@@ -1,0 +1,32 @@
+<div class="movie-grid">
+  <div class="movie-card" *ngFor="let film of films">
+    <img [src]="film.poster" alt="{{ film.title }}" />
+    <h3>{{ film.title }}</h3>
+    <p>{{ film.genre }} | {{ film.year }}</p>
+    <button (click)="openDetail(film)">Watch Now ▶️</button>
+  </div>
+</div>
+
+
+<div class="modal" *ngIf="selectedFilm">
+  <div class="modal-content fade-in">
+    <span class="close" (click)="closeDetail()">&times;</span>
+    <h2>{{ selectedFilm.title }}</h2>
+    <p>{{ selectedFilm.genre }} | {{ selectedFilm.year }}</p>
+    <p>Rating: {{ selectedFilm.rating }} ★</p>
+
+  
+    <div class="poster-container fade-in" *ngIf="!isPlaying">
+      <img [src]="selectedFilm.poster" alt="{{ selectedFilm.title }}" />
+      <div class="play-button" (click)="startPlaying()">▶</div>
+    </div>
+
+
+    <div class="fade-in" *ngIf="isPlaying">
+      <video width="100%" controls autoplay>
+        <source [src]="selectedFilm.videoUrl" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</div>

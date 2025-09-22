@@ -1,0 +1,45 @@
+<div class="auth-container">
+  <h2>Login</h2>
+
+  <form [formGroup]="form" (ngSubmit)="login()">
+    <div>
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        required
+      />
+      <div class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+        <small *ngIf="form.get('email')?.hasError('required')">Email wajib diisi</small>
+        <small *ngIf="form.get('email')?.hasError('email')">Format email tidak valid</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        required
+      />
+      <div class="error" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+        <small *ngIf="form.get('password')?.hasError('required')">Password wajib diisi</small>
+        <small *ngIf="form.get('password')?.hasError('minlength')">Minimal 6 karakter</small>
+      </div>
+    </div>
+    <button type="submit" [disabled]="form.invalid || isLoading">
+      {{ isLoading ? 'Loading...' : 'Login' }}
+    </button>
+  </form>
+  <div *ngIf="isError" class="alert alert-error">
+    {{ message }}
+  </div>
+  <div *ngIf="!isError && message" class="alert alert-success">
+    {{ message }}
+  </div>
+  <p class="link-text">
+    Belum punya akun? <a routerLink="/register">Daftar</a>
+  </p>
+</div>

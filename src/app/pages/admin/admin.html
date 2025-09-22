@@ -1,0 +1,106 @@
+<div class="navbar">
+  <span>🎬 Admin Dashboard</span>
+  <button type="button" class="menu-btn" (click)="toggleSidebar()">☰</button>
+  <button type="button" class="logout-btn" (click)="logout()">Logout</button>
+</div>
+
+<div class="dashboard-container" [class.sidebar-open]="sidebarOpen">
+  <div class="sidebar">
+    <ul>
+      <li [class.active]="activeTab === 'list'" (click)="activeTab = 'list'">📋 Daftar Film</li>
+      <li [class.active]="activeTab === 'add'" (click)="activeTab = 'add'">
+        {{ editingFilmId ? '✏️ Edit Film' : '➕ Tambah Film' }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <div *ngIf="loading" class="loading">⏳ Sedang memuat data...</div>
+    <div *ngIf="errorMsg && !loading" class="error-box">⚠️ {{ errorMsg }}</div>
+
+    <div *ngIf="!loading && activeTab === 'list'" class="film-list">
+      <h3>📂 Daftar Film</h3>
+      <div class="filter-bar">
+        <button type="button" [class.active]="filter === 'all'" (click)="changeFilter('all')">Semua</button>
+        <button type="button" [class.active]="filter === 'published'" (click)="changeFilter('published')">Published</button>
+      </div>
+      
+      <div *ngIf="films?.length === 0 && !errorMsg" class="empty-state">
+        📭 Belum ada film yang tersimpan.
+        <button type="button" class="btn-add" (click)="activeTab = 'add'">➕ Tambah Film</button>
+      </div>
+
+      <table *ngIf="films.length > 0" class="film-table">
+        <thead>
+          <tr>
+            <th>Poster</th>
+            <th>Judul</th>
+            <th>Tahun</th>
+            <th>Rating</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let film of films">
+            <td>
+              <img [src]="film.poster || 'assets/no-poster.png'" class="poster-thumb" alt="{{ film.title }}" />
+            </td>
+            <td>{{ film.title }}</td>
+            <td>{{ film.year }}</td>
+            <td>⭐ {{ film.rating }}</td>
+            <td>
+              <span [class.published]="film.published" [class.draft]="!film.published">
+                {{ film.published ? '✅ Published' : '❌ Draft' }}
+              </span>
+            </td>
+            <td>
+              <button type="button" class="btn-edit" (click)="editFilm(film)">✏️ Edit</button>
+              <button type="button" class="btn-delete" (click)="deleteFilm(film.id || '')">🗑️ Hapus</button>
+              <button type="button" class="btn-publish" (click)="togglePublish(film)">
+                {{ film.published ? 'Unpublish' : 'Publish' }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="activeTab === 'add'" class="form-section">
+      <h3>{{ editingFilmId ? '✏️ Edit Film' : '➕ Tambah Film' }}</h3>
+      <form [formGroup]="filmForm" (ngSubmit)="onSubmit()">
+        <label for="title">Judul:</label>
+        <input id="title" formControlName="title" required />
+
+        <label for="description">Deskripsi:</label>
+        <textarea id="description" formControlName="description"></textarea>
+
+        <label for="genre">Genre:</label>
+        <input id="genre" formControlName="genre" />
+
+        <label for="year">Tahun:</label>
+        <input id="year" type="number" formControlName="year" min="1900" />
+
+        <label for="rating">Rating:</label>
+        <input id="rating" type="number" formControlName="rating" step="0.1" min="0" max="5" />
+
+        <label for="poster">Poster URL:</label>
+        <input id="poster" formControlName="poster" />
+
+        <label for="videoUrl">Video URL (YouTube):</label>
+        <input id="videoUrl" formControlName="videoUrl" />
+
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="published" /> Publikasikan
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" [disabled]="filmForm.invalid || loading">
+            {{ editingFilmId ? 'Update' : 'Tambah' }}
+          </button>
+          <button type="button" *ngIf="editingFilmId" (click)="cancelEdit()">Batal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

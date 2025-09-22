@@ -1,0 +1,220 @@
+/* Container detail */
+.detail-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  color: #fff;
+  background: #141414;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Judul */
+.detail-container h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #e50914;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.detail-container p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #b3b3b3;
+}
+
+/* Poster */
+.detail-container .poster {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 10px;
+  margin: 20px 0;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s;
+}
+
+.detail-container .poster:hover {
+  transform: scale(1.02);
+}
+
+/* Tombol utama */
+.detail-container button {
+  background: #e50914;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.detail-container button:hover {
+  background: #f40612;
+  transform: scale(1.05);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+  background: #000;
+  padding: 20px;
+  border-radius: 12px;
+  position: relative;
+  max-width: 900px;
+  width: 90%;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 1);
+  animation: slideUp 0.4s ease-in-out;
+}
+
+.modal-content iframe {
+  width: 100%;
+  height: 500px;
+  border: none;
+  border-radius: 10px;
+}
+
+.modal-content .close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.modal-content .close:hover {
+  transform: scale(1.2);
+  color: #e50914;
+}
+
+
+.comments-section {
+  margin-top: 40px;
+  background: #1f1f1f;
+  padding: 20px;
+  border-radius: 10px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.comments-section h3 {
+  margin-bottom: 15px;
+  color: #fff;
+  border-bottom: 2px solid #333;
+  padding-bottom: 8px;
+}
+
+/* Form komentar */
+.comment-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.comment-form input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #333;
+  color: #fff;
+}
+
+.comment-form input:focus {
+  outline: 2px solid #e50914;
+}
+
+.comment-form button {
+  background: #e50914;
+  border: none;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.comment-form button:hover {
+  background: #f40612;
+  transform: scale(1.05);
+}
+
+/* Daftar komentar */
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.comment {
+  background: #2a2a2a;
+  padding: 12px 15px;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.comment:hover {
+  transform: translateX(5px);
+  background: #333;
+}
+
+.comment strong {
+  color: #e50914;
+  font-size: 0.95rem;
+}
+
+.comment .time {
+  font-size: 0.8rem;
+  color: #999;
+  margin-left: 10px;
+}
+
+.comment p {
+  margin: 5px 0 0;
+  color: #ddd;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .detail-container {
+    padding: 15px;
+  }
+
+  .detail-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .detail-container .poster {
+    max-width: 100%;
+  }
+
+  .modal-content iframe {
+    height: 300px;
+  }
+}

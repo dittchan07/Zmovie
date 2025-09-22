@@ -1,0 +1,129 @@
+/* ===== Container ===== */
+.container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 24px;
+  background: #1f1f1f; /* dark gray */
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.7);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Judul */
+.container h2 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #e50914; /* Netflix red */
+  text-align: center;
+}
+
+/* Loading text */
+.text-center {
+  text-align: center;
+  color: #bbb;
+  margin: 20px 0;
+}
+
+/* Form spacing */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Label */
+form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #ddd;
+}
+
+/* Input & textarea */
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #2a2a2a;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: background 0.3s ease, border 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus {
+  background: #333;
+  border: 1px solid #e50914;
+}
+
+/* Poster preview */
+img {
+  margin-top: 10px;
+  width: 120px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* Video iframe */
+iframe {
+  margin-top: 12px;
+  width: 100%;
+  height: 200px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+/* Checkbox */
+form .flex {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+form input[type="checkbox"] {
+  transform: scale(1.2);
+  accent-color: #e50914;
+}
+
+/* Button */
+form button {
+  align-self: flex-start;
+  background: #e50914;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+form button:hover {
+  background: #f40612;
+  transform: scale(1.05);
+}
+
+form button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 18px;
+  }
+
+  .container h2 {
+    font-size: 1.4rem;
+  }
+
+  iframe {
+    height: 160px;
+  }
+}

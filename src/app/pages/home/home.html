@@ -1,0 +1,46 @@
+<div class="home-container">
+  <div class="header">
+    <h1 class="title">🎬 Daftar Film</h1>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">⏳ Sedang memuat data film...</div>
+
+  <div *ngIf="errorMsg && !isLoading" class="error">{{ errorMsg }}</div>
+
+  <div *ngIf="!isLoading && !errorMsg && films.length > 0; else emptyState">
+    <div class="film-grid">
+      <div
+        class="film-card"
+        *ngFor="let film of films"
+        (click)="goToDetail(film.id)"
+      >
+        <div class="poster-wrapper">
+          <img
+            [src]="film.poster || 'assets/no-poster.png'"
+            [alt]="film.title"
+            class="poster"
+            (error)="film.poster = 'assets/no-poster.png'"
+          />
+
+          <span
+            class="badge"
+            [ngClass]="film.published ? 'published' : 'draft'"
+          >
+            {{ film.published ? '✅ Published' : '❌ Draft' }}
+          </span>
+
+          <div class="overlay">
+            <h3>{{ film.title }}</h3>
+            <p>{{ film.genre }} | {{ film.year }}</p>
+            <p>⭐ {{ film.rating }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #emptyState>
+    <div class="empty">😢 Belum ada film yang dipublish oleh admin.</div>
+  </ng-template>
+</div>
